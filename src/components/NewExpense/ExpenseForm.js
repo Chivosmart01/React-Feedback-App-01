@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import "./ExpenseForm.css";
 
-function ExpenseForm() {
+function ExpenseForm(props) {
   const [enteredTitle, setEnteredTitle] = useState("");
-  const [enteredAmount, setEnteredAmount] = useState("");
+  const [enteredAmount, setEnteredAmount] = useState();
   const [enteredDate, setEnteredDate] = useState("");
 
-  const [userInput, setUserInput] = useState({
-      enteredTitle : "",
-      enteredAmount: "",
-      enteredDate : "",
-  })
+  // const [userInput, setUserInput] = useState({
+  //     enteredTitle : "",
+  //     enteredAmount: "",
+  //     enteredDate : "",
+  // })
 
   const titleChangeHandler = (event) => {
     setEnteredTitle(event.target.value);
@@ -49,9 +49,9 @@ function ExpenseForm() {
         Amount:enteredAmount,
         date: new Date(enteredDate),
     }
-
     // console.log(enteredData)
-    
+    props.onSaveExpenseData(enteredData)
+
     setEnteredTitle("")
     setEnteredAmount("")
     setEnteredDate("")
@@ -69,8 +69,8 @@ function ExpenseForm() {
           <input
             value={enteredAmount}
             type="number"
-            min="0.01"
-            step="0.01"
+            // min="0.01"
+            // step="0.01"
             onChange={amountChangeHandler}
           />
         </div>
